@@ -3,40 +3,62 @@
  */
 
 import React, {Component} from 'react';
-import {Menu, Icon} from 'semantic-ui-react';
-
+import {Dropdown, Image, Menu, Icon, Header} from 'semantic-ui-react';
+import faker from 'faker';
+import './menu-layout.css'
 export default class MenuLayout extends Component {
 
-	state = {};
+	triggerAccount = (
+		<span>
+			<Image avatar src={faker.internet.avatar()}/> <label>{faker.name.findName()}</label>
+		</span>
+	);
 
-	handleItemClick = (e, {name})=> {
-		this.setState({activeItem: name});
-		this.props.history.push(name === 'home' ? '/' : name);
+	triggerSessions = (
+		<span>Sessions</span>
+	);
+
+	redirectRequest = (name, e)=> {
+		this.props.history.push(name)
 	};
 
 	render() {
-		const {activeItem} = this.state;
-
 		return (
 			<div className="ui fluid">
-				<Menu>
-					<Menu.Item icon><Icon circular inverted name="user" color='blue'/></Menu.Item>
-					<Menu.Item name="home" onClick={this.handleItemClick} active={activeItem === 'home'} icon>
-						<Icon name="home" color='blue' circular inverted/></Menu.Item>
-					<Menu.Item name="record-session" onClick={this.handleItemClick} active={activeItem === 'record-session'} icon>
-						<Icon circular inverted name="record" color='blue'/></Menu.Item>
-					<Menu.Item name="Members" onClick={this.handleItemClick} active={activeItem === 'members'} icon>
-						<Icon circular inverted name="users" color='blue'/>
-					</Menu.Item>
-					<Menu.Item name="Feedback" onClick={this.handleItemClick} active={activeItem === 'feedback'} icon>
-						<Icon circular inverted name="thumbs up" color='blue'/>
-					</Menu.Item>
-					<Menu.Menu position='right'>
-						<Menu.Item name='logout' active={activeItem === 'logout'} onClick={this.handleItemClick}/>
+				<Menu stackable>
+					<Menu.Menu position="left">
+						<Menu.Item>
+							<Icon name="bicycle" size="huge"/>
+						</Menu.Item>
+						<Header as="h1" className="ui center ">Come Spin</Header>
+					</Menu.Menu>
+					<Menu.Menu position="right">
+						<Menu.Item>
+							<Dropdown trigger={this.triggerSessions} pointing="top right" icon={null}>
+								<Dropdown.Menu>
+									<Dropdown.Item text='Record' icon='calendar'
+																 onClick={this.redirectRequest.bind(this, 'record-session')}/>
+									<Dropdown.Item text='Members' icon='users' onClick={this.redirectRequest.bind(this, 'members')}/>
+								</Dropdown.Menu>
+							</Dropdown>
+						</Menu.Item>
+						<Menu.Item>
+							Trackers
+						</Menu.Item>
+						<Menu.Item>
+							<Dropdown trigger={this.triggerAccount} pointing="top left" icon={null}>
+								<Dropdown.Menu>
+									<Dropdown.Item text='Account' icon='user' onClick={this.redirectRequest.bind(this, 'user-profile')}/>
+									<Dropdown.Item text='Settings' icon='settings' onClick={this.redirectRequest.bind(this, 'settings')}/>
+									<Dropdown.Item text='Sign Out' icon='sign out' onClick={this.redirectRequest.bind(this, 'logout')}/>
+								</Dropdown.Menu>
+							</Dropdown>
+						</Menu.Item>
 					</Menu.Menu>
 				</Menu>
 				{this.props.children}
-			</div>)
+			</div>
+		)
 	}
 
 }

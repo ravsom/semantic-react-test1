@@ -10,12 +10,14 @@ import RecordSession from './Components/Record-Session'
 import IndexLayout from './Components/DefaultLayout'
 import LogoutContainer from './Components/Logout'
 import SessionFeedback from './Components/SessionFeedback'
+import UserProfile from './Components/UserProfile'
 
 const routes = ()=> {
 	return (
 		<Route path="/" component={MainLayout}>
 			<Route component={Menu} >
 				<IndexRoute component={IndexLayout}/>
+				<Route path="user-profile" component={UserProfile}/>
 				<Route path="members" component={Members}/>
 				<Route path="record-session" component={RecordSession}/>
 				<Route path="feedback" component={SessionFeedback}/>
