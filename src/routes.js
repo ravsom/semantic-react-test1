@@ -17,11 +17,11 @@ const routes = ()=> {
 		<Route path="/" component={MainLayout}>
 			<Route component={Menu} >
 				<IndexRoute component={IndexLayout}/>
-				<Route path="user-profile" component={UserProfile}/>
-				<Route path="members" component={Members}/>
-				<Route path="record-session" component={RecordSession}/>
-				<Route path="feedback" component={SessionFeedback}/>
-				<Route path="logout" component={LogoutContainer}/>
+				<Route path="user-profile" component={UserProfile} pageName="User Profile"/>
+				<Route path="members" component={Members} pageName="Members"/>
+				<Route path="record-session" component={RecordSession} pageName="Record Session"/>
+				<Route path="feedback" component={SessionFeedback} pageName="Ride Feedback"/>
+				<Route path="logout" component={LogoutContainer} pageName="Logout"/>
 			</Route>
 		</Route>
 	)

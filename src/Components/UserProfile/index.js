@@ -3,7 +3,7 @@
  */
 
 import React, {Component} from 'react';
-import {Card, Icon, Segment, Button} from 'semantic-ui-react'
+import {Card, Icon, Button} from 'semantic-ui-react'
 import './User.css'
 
 import faker from 'faker';
@@ -15,39 +15,68 @@ export default class UserComponent extends Component {
 			<a><Icon name="bicycle"/>23 rides</a>
 		);
 		return (
-			<div className="ui container fluid User-container">
-				<Card
-					header={faker.name.findName()}
-					meta="Rider"
-					extra={extra}
+			<div className="ui container fluid">
+				<Card className="centered User-card-text"
+							header={faker.name.findName()}
+							meta="Rider"
+							extra={extra}
 				/>
+				<Card.Group className="centered">
 
-				<Segment>
-					<Card.Group>
-						<Card>
-							<Card.Content>
-								<Card.Header>
-									Facebook
-								</Card.Header>
-								<Card.Meta>
-									Connect to Facebook
-								</Card.Meta>
-								<Card.Description>
-									Connecting with Facebook will help you connect with your friends on the Come-Spin network.
-								</Card.Description>
-							</Card.Content>
-							<Card.Content extra>
-								<div className="ui ">
-									<Button color='facebook'>
-										<Icon name='facebook'/> Connect
-									</Button>
-								</div>
-							</Card.Content>
-						</Card>
-					</Card.Group>
-				</Segment>
+
+					<NetworkConnectCard name="Google"
+															buttonColor="google plus"
+															icon="google"/>
+
+					<NetworkConnectCard name="Apple Healthkit"
+															buttonColor="lightgray"
+															icon="apple"/>
+
+					<NetworkConnectCard name="Strava"
+															buttonColor="orange"/>
+
+					<NetworkConnectCard name="Fibit"
+															buttonColor="grey"/>
+
+					<NetworkConnectCard name="Jawbone"
+															buttonColor="teal"/>
+
+					<NetworkConnectCard name="Facebook"
+															buttonColor="facebook"
+															icon="facebook"/>
+
+				</Card.Group>
 
 			</div>
 		)
+	}
+}
+
+class NetworkConnectCard extends Component {
+
+	render = ()=> {
+		return (
+			<Card>
+				<Card.Content>
+					<Card.Header>
+						{this.props.name}
+					</Card.Header>
+					<Card.Meta>
+						Connect {this.props.name}
+					</Card.Meta>
+					<Card.Description>
+						Enable data to be fetched from {this.props.name} over to Come Spin to get competitive and make it more fun.
+					</Card.Description>
+				</Card.Content>
+				<Card.Content extra>
+					<div className="ui User-card-text">
+						<Button color={this.props.buttonColor}>
+							{this.props.icon ? <Icon name={this.props.icon}/> : null} Connect
+						</Button>
+					</div>
+				</Card.Content>
+			</Card>
+		);
+
 	}
 }

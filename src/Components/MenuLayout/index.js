@@ -24,13 +24,12 @@ export default class MenuLayout extends Component {
 
 	render() {
 		return (
-			<div className="ui fluid">
+			<div className="ui fluid container">
 				<Menu stackable>
-					<Menu.Menu position="left">
-						<Menu.Item>
-							<Icon name="bicycle" size="huge"/>
+					<Menu.Menu>
+						<Menu.Item header>
+							<Header as="h2"><Icon name="bicycle"/>Come Spin</Header>
 						</Menu.Item>
-						<Header as="h1" className="ui center ">Come Spin</Header>
 					</Menu.Menu>
 					<Menu.Menu position="right">
 						<Menu.Item>
