@@ -25,13 +25,13 @@ export default class MenuLayout extends Component {
 	render() {
 		return (
 			<div className="ui fluid container">
-				<Menu stackable>
-					<Menu.Menu>
+				<Menu className="ui stackable">
+					<Menu.Menu className="ui stackable">
 						<Menu.Item header>
 							<Header as="h2"><Icon name="bicycle"/>Come Spin</Header>
 						</Menu.Item>
 					</Menu.Menu>
-					<Menu.Menu position="right">
+					<Menu.Menu position="right" className="ui">
 						<Menu.Item>
 							<Dropdown trigger={this.triggerSessions} pointing="top right" icon={null}>
 								<Dropdown.Menu>
@@ -55,7 +55,6 @@ export default class MenuLayout extends Component {
 						</Menu.Item>
 					</Menu.Menu>
 				</Menu>
-				{this.props.children}
 			</div>
 		)
 	}

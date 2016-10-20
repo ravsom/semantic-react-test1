@@ -3,9 +3,11 @@
  */
 
 import React, {Component} from 'react'
-import {Header, Icon, Form, Label, Segment, Button, Message} from 'semantic-ui-react'
+import {Header, Icon, Form, Label, Button, Message, Grid} from 'semantic-ui-react'
 
-import UserSelect from '../UserSelect'
+import AttendanceSelector from '../Attendance-Selector'
+import './record-session.css'
+
 export default class RecordSession extends Component {
 	state = {serializedForm: {}};
 
@@ -25,15 +27,18 @@ export default class RecordSession extends Component {
 						Record Session
 					</Header.Content>
 				</Header>
-				<Segment>
-					<Label as="a" color='red' tag>Gold's Gym, RMZ Infinity</Label>
-					<Label as="a" color='teal' tag>11th October 2016</Label>
-					<Label as="a" color='yellow' tag>7 PM</Label>
-				</Segment>
-				<Form onSubmit={this.handleSubmit}>
-					<UserSelect/>
+				<Grid divided='vertically'>
+					<Grid.Row columns={3}>
+						<Grid.Column className="align-right"><Label as="a" color='red' tag>Gold's Gym, RMZ
+							Infinity</Label></Grid.Column>
+						<Grid.Column className="align-center"><Label as="a" color='teal' tag>11th October 2016</Label></Grid.Column>
+						<Grid.Column className="align-left"><Label as="a" color='yellow' tag>7 PM</Label></Grid.Column>
+					</Grid.Row>
+				</Grid>
+				<Form onSubmit={this.handleSubmit} id="sessionForm">
 
-					<Button className='ui centered' primary type='submit'>Submit</Button>
+					<AttendanceSelector/>
+					<Button className='ui align-center' primary type='submit'>Submit</Button>
 					<Message>
 						<pre>serializedForm: {JSON.stringify(serializedForm, null, 2)}</pre>
 					</Message>

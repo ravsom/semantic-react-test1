@@ -1,3 +1,9 @@
 .menu-layout-header{
-    padding:30px;
+    padding:0px;
+}
+
+.no-border{
+    border-right: none;
+    border-bottom: none;
+    box-shadow: none;
 }

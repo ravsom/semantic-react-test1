@@ -29,7 +29,7 @@ export default class UserComponent extends Component {
 															icon="google"/>
 
 					<NetworkConnectCard name="Apple Healthkit"
-															buttonColor="lightgray"
+															buttonColor="black"
 															icon="apple"/>
 
 					<NetworkConnectCard name="Strava"
