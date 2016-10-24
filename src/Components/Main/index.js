@@ -10,7 +10,7 @@ export default class MainLayout extends Component {
 
 	render() {
 		return (
-			<div className="Main-top-layout">
+			<div className="ui Main-top-layout">
 				<Menu {...this.props}/>
 				<div className="ui container Main-content-layout">
 					<div className="ui">
