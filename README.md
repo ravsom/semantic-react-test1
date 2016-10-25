@@ -29,6 +29,9 @@ Product targeted towards Spinning instructors to mark member attendance, trackli
     - Apple Healthkit
 
 ## Authenticate Member
+**Role** Instructor
+
+- Associate logged in user with member in the system.
 
 ## Record Session
 **Role** Instructor

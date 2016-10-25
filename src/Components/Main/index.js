@@ -13,9 +13,7 @@ export default class MainLayout extends Component {
 			<div className="ui Main-top-layout">
 				<Menu {...this.props}/>
 				<div className="ui container Main-content-layout">
-					<div className="ui">
-						{this.props.children}
-					</div>
+					{this.props.children}
 				</div>
 			</div>
 		);
