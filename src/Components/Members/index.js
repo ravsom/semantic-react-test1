@@ -4,7 +4,7 @@
 import React, {Component} from 'react';
 import axios from 'axios'
 
-import {Table, Header, Image} from 'semantic-ui-react'
+import {Table, Header, Image, Button} from 'semantic-ui-react'
 import './members.css';
 
 import faker from 'faker';
@@ -75,6 +75,12 @@ export default class Members extends Component {
 					</div>
 					: null
 				}
+
+				<div className="ui container align-center Main-content-layout">
+					<a href="http://localhost:3333/api/auth/facebook">
+						<Button className="primary" icon="add user"/>
+					</a>
+				</div>
 			</div>
 		)
 	}
