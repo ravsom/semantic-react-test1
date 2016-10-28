@@ -4,8 +4,11 @@
 
 import React, {Component} from 'react';
 import {Dropdown, Image, Menu, Icon, Header} from 'semantic-ui-react';
-import faker from 'faker';
+import axios from 'axios'
 import './menu-layout.css'
+
+import faker from 'faker';
+
 export default class MenuLayout extends Component {
 
 	triggerAccount = (
@@ -20,6 +23,14 @@ export default class MenuLayout extends Component {
 
 	redirectRequest = (name, e)=> {
 		this.props.history.push(name)
+	};
+
+	handleLogout = (e)=> {
+		axios.post('/api/logout').then((json)=> {
+			console.log('menu handle logout -> ' + json);
+		}).catch((error)=> {
+			console.log('error while logging out' + JSON.stringify(error));
+		});
 	};
 
 	render() {
@@ -49,7 +60,7 @@ export default class MenuLayout extends Component {
 								<Dropdown.Menu>
 									<Dropdown.Item text='Account' icon='user' onClick={this.redirectRequest.bind(this, 'user-profile')}/>
 									<Dropdown.Item text='Settings' icon='settings' onClick={this.redirectRequest.bind(this, 'settings')}/>
-									<Dropdown.Item text='Sign Out' icon='sign out' onClick={this.redirectRequest.bind(this, 'logout')}/>
+									<Dropdown.Item text='Sign Out' icon='sign out' onClick={this.handleLogout}/>
 								</Dropdown.Menu>
 							</Dropdown>
 						</Menu.Item>

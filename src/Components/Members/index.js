@@ -21,11 +21,6 @@ export default class Members extends Component {
 		});
 	};
 
-	getInitialState = ()=> {
-		return {
-			members: []
-		};
-	};
 	componentDidMount = ()=> {
 		this.fetchMembers();
 	};

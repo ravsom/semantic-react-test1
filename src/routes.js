@@ -7,7 +7,6 @@ import MainLayout from './Components/Main'
 import Members from './Components/Members';
 import RecordSession from './Components/Record-Session'
 import IndexLayout from './Components/DefaultLayout'
-import LogoutContainer from './Components/Logout'
 import SessionFeedback from './Components/SessionFeedback'
 import UserProfile from './Components/UserProfile'
 
@@ -19,7 +18,6 @@ const routes = ()=> {
 			<Route path="members" component={Members} pageName="Members"/>
 			<Route path="record-session" component={RecordSession} pageName="Record Session"/>
 			<Route path="feedback" component={SessionFeedback} pageName="Ride Feedback"/>
-			<Route path="logout" component={LogoutContainer} pageName="Logout"/>
 		</Route>
 	)
 };
