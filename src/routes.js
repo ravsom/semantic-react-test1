@@ -9,15 +9,18 @@ import RecordSession from './Components/Record-Session'
 import IndexLayout from './Components/DefaultLayout'
 import SessionFeedback from './Components/SessionFeedback'
 import UserProfile from './Components/UserProfile'
+import LoginComponent from './Components/Login'
 
 const routes = ()=> {
 	return (
 		<Route path="/" component={MainLayout}>
 			<IndexRoute component={IndexLayout}/>
-			<Route path="user-profile" component={UserProfile} pageName="User Profile"/>
-			<Route path="members" component={Members} pageName="Members"/>
-			<Route path="record-session" component={RecordSession} pageName="Record Session"/>
-			<Route path="feedback" component={SessionFeedback} pageName="Ride Feedback"/>
+			<Route path="user-profile" component={UserProfile}/>
+			<Route path="members" component={Members}/>
+			<Route path="record-session" component={RecordSession}/>
+			<Route path="feedback" component={SessionFeedback}/>
+			<Route path="login" component={LoginComponent}/>
+
 		</Route>
 	)
 };

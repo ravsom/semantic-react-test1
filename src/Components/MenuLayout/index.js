@@ -3,17 +3,17 @@
  */
 
 import React, {Component} from 'react';
-import {Dropdown, Image, Menu, Icon, Header} from 'semantic-ui-react';
+import {Dropdown, Menu, Icon, Header} from 'semantic-ui-react';
 import axios from 'axios'
 import './menu-layout.css'
+import {connect} from 'react-redux'
 
-import faker from 'faker';
-
-export default class MenuLayout extends Component {
+class MenuLayout extends Component {
 
 	triggerAccount = (
 		<span>
-			<Image avatar src={faker.internet.avatar()}/> <label>{faker.name.findName()}</label>
+			<Image avatar
+						 src={this.props.user ? this.props.user.image : null}/> <label>{this.props.user ? this.props.user.name : null}</label>
 		</span>
 	);
 
@@ -33,7 +33,31 @@ export default class MenuLayout extends Component {
 		});
 	};
 
+	authenticatedMenu = ()=> {
+		return (
+			<Menu.Item>
+				<Dropdown trigger={this.triggerAccount} pointing="top left" icon={null}>
+					<Dropdown.Menu>
+						<Dropdown.Item text='Account' icon='user'
+													 onClick={this.redirectRequest.bind(this, 'user-profile')}/>
+						<Dropdown.Item text='Settings' icon='settings'
+													 onClick={this.redirectRequest.bind(this, 'settings')}/>
+						<Dropdown.Item text='Sign Out' icon='sign out' onClick={this.handleLogout}/>
+					</Dropdown.Menu>
+				</Dropdown>
+			</Menu.Item>
+		)
+	};
+	getLoginMenuItem = ()=> {
+		return (
+			<Menu.Item onClick={this.redirectRequest.bind(this, 'login')}>
+				Login
+			</Menu.Item>
+		)
+	};
+
 	render() {
+		const {user} = this.props;
 		return (
 			<div className="ui">
 				<Menu className="ui stackable">
@@ -55,19 +79,21 @@ export default class MenuLayout extends Component {
 						<Menu.Item>
 							Trackers
 						</Menu.Item>
-						<Menu.Item>
-							<Dropdown trigger={this.triggerAccount} pointing="top left" icon={null}>
-								<Dropdown.Menu>
-									<Dropdown.Item text='Account' icon='user' onClick={this.redirectRequest.bind(this, 'user-profile')}/>
-									<Dropdown.Item text='Settings' icon='settings' onClick={this.redirectRequest.bind(this, 'settings')}/>
-									<Dropdown.Item text='Sign Out' icon='sign out' onClick={this.handleLogout}/>
-								</Dropdown.Menu>
-							</Dropdown>
-						</Menu.Item>
+						{user ?
+							this.authenticatedMenu()
+							: this.getLoginMenuItem()}
 					</Menu.Menu>
 				</Menu>
 			</div>
 		)
 	}
-
 }
+
+const mapStateToProps = (state)=> {
+	return {
+		user: state.authUser
+	}
+};
+
+const ConnectedMenu = connect(mapStateToProps)(MenuLayout);
+export default ConnectedMenu

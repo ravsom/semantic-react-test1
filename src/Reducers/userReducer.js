@@ -2,12 +2,33 @@
  * Created by rs on 28/10/16.
  */
 
+import {List, Map} from 'immutable'
+
+
+const getMainUser = (users = [])=> {
+	return (users.length > 0) ? users[0] : '';
+};
 const userReducer = (state = {}, action)=> {
-	console.log('calling user reducer with state ' + state);
 
 	switch (action.type) {
+		case 'ATTENDEES':
+			return Map({
+				...state,
+				selectedUsers: List.of(action.users),
+				mainUser: getMainUser(action.users)
+			});
+		case 'NO_USERS':
+			return new Map({
+				...state,
+				selectedUsers: []
+			});
 		default :
-			return state;
+			console.log('returning default state');
+			return Map({
+				state: {},
+				selectedUsers: [],
+				mainUser: null
+			});
 	}
 };
 
