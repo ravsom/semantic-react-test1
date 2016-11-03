@@ -65,7 +65,7 @@ class DefaultLayout extends Component {
 
 const mapStateToProps = (state)=> {
 	var mainUser = state.default.get('mainUser');
-	var selectedUsers = List(...state.default.get('selectedUsers'));
+	var selectedUsers = state.default.get('selectedUsers') ? List(...state.default.get('selectedUsers')) : [];
 
 	return {
 		mainUser: mainUser,

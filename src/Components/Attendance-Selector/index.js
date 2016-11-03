@@ -9,7 +9,6 @@ import {Dropdown} from 'semantic-ui-react'
 
 const getOptions = () => _.times(3, () => {
 	const name = faker.name.findName();
-	console.log("name is: " + name);
 	return {text: name, value: _.snakeCase(name)}
 })
 export default class AttendanceSelector extends Component {

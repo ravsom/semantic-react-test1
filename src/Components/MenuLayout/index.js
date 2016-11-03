@@ -3,17 +3,20 @@
  */
 
 import React, {Component} from 'react';
-import {Dropdown, Menu, Icon, Header} from 'semantic-ui-react';
-import axios from 'axios'
+import {Dropdown, Menu, Icon, Header, Image} from 'semantic-ui-react';
 import './menu-layout.css'
 import {connect} from 'react-redux'
+import {logoutUser} from '../../ActionCreators/userAuthActionCreator'
 
 class MenuLayout extends Component {
 
-	triggerAccount = (
+	getDisplayName = (user)=> {
+		return user.firstName + ' ' + user.lastName;
+	};
+	triggerAccount = ()=> (
 		<span>
 			<Image avatar
-						 src={this.props.user ? this.props.user.image : null}/> <label>{this.props.user ? this.props.user.name : null}</label>
+						 src={this.props.user ? this.props.user.photoUrl : null}/> <label>{this.props.user ? this.getDisplayName(this.props.user) + ' ' : null}</label>
 		</span>
 	);
 
@@ -26,33 +29,45 @@ class MenuLayout extends Component {
 	};
 
 	handleLogout = (e)=> {
-		axios.post('/api/logout').then((json)=> {
-			console.log('menu handle logout -> ' + json);
-		}).catch((error)=> {
-			console.log('error while logging out' + JSON.stringify(error));
-		});
+		this.props.dispatch(logoutUser());
 	};
 
 	authenticatedMenu = ()=> {
 		return (
-			<Menu.Item>
-				<Dropdown trigger={this.triggerAccount} pointing="top left" icon={null}>
-					<Dropdown.Menu>
-						<Dropdown.Item text='Account' icon='user'
-													 onClick={this.redirectRequest.bind(this, 'user-profile')}/>
-						<Dropdown.Item text='Settings' icon='settings'
-													 onClick={this.redirectRequest.bind(this, 'settings')}/>
-						<Dropdown.Item text='Sign Out' icon='sign out' onClick={this.handleLogout}/>
-					</Dropdown.Menu>
-				</Dropdown>
-			</Menu.Item>
+			<Menu.Menu position="right" className="ui container">
+				<Menu.Item>
+					<Dropdown trigger={this.triggerSessions} pointing="top right" icon={null}>
+						<Dropdown.Menu>
+							<Dropdown.Item text='Record' icon='calendar'
+														 onClick={this.redirectRequest.bind(this, 'record-session')}/>
+							<Dropdown.Item text='Members' icon='users' onClick={this.redirectRequest.bind(this, 'members')}/>
+						</Dropdown.Menu>
+					</Dropdown>
+				</Menu.Item>
+				<Menu.Item>
+					Trackers
+				</Menu.Item>
+				<Menu.Item>
+					<Dropdown trigger={this.triggerAccount()} pointing="top left" icon={null}>
+						<Dropdown.Menu>
+							<Dropdown.Item text='Account' icon='user'
+														 onClick={this.redirectRequest.bind(this, 'user-profile')}/>
+							<Dropdown.Item text='Settings' icon='settings'
+														 onClick={this.redirectRequest.bind(this, 'settings')}/>
+							<Dropdown.Item text='Sign Out' icon='sign out' onClick={this.handleLogout}/>
+						</Dropdown.Menu>
+					</Dropdown>
+				</Menu.Item>
+			</Menu.Menu>
 		)
 	};
 	getLoginMenuItem = ()=> {
 		return (
-			<Menu.Item onClick={this.redirectRequest.bind(this, 'login')}>
-				Login
-			</Menu.Item>
+			<Menu.Menu position="right" className="ui container">
+				<Menu.Item onClick={this.redirectRequest.bind(this, 'login')}>
+					Login
+				</Menu.Item>
+			</Menu.Menu>
 		)
 	};
 
@@ -62,27 +77,13 @@ class MenuLayout extends Component {
 			<div className="ui">
 				<Menu className="ui stackable">
 					<Menu.Menu className="ui container">
-						<Menu.Item header>
+						<Menu.Item header onClick={this.redirectRequest.bind(this, '/')}>
 							<Header as="h2"><Icon name="bicycle"/>Come Spin</Header>
 						</Menu.Item>
 					</Menu.Menu>
-					<Menu.Menu position="right" className="ui container">
-						<Menu.Item>
-							<Dropdown trigger={this.triggerSessions} pointing="top right" icon={null}>
-								<Dropdown.Menu>
-									<Dropdown.Item text='Record' icon='calendar'
-																 onClick={this.redirectRequest.bind(this, 'record-session')}/>
-									<Dropdown.Item text='Members' icon='users' onClick={this.redirectRequest.bind(this, 'members')}/>
-								</Dropdown.Menu>
-							</Dropdown>
-						</Menu.Item>
-						<Menu.Item>
-							Trackers
-						</Menu.Item>
-						{user ?
-							this.authenticatedMenu()
-							: this.getLoginMenuItem()}
-					</Menu.Menu>
+					{user ?
+						this.authenticatedMenu()
+						: this.getLoginMenuItem()}
 				</Menu>
 			</div>
 		)
@@ -90,8 +91,10 @@ class MenuLayout extends Component {
 }
 
 const mapStateToProps = (state)=> {
+	var authenticatedUser = state.default.get('authenticatedUser');
+	console.log('authenticated user: ' + (authenticatedUser));
 	return {
-		user: state.authUser
+		user: authenticatedUser
 	}
 };
 

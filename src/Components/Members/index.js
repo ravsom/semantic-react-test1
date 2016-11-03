@@ -4,15 +4,12 @@
 import React, {Component} from 'react';
 import axios from 'axios'
 
-import {Table, Header, Image, Button} from 'semantic-ui-react'
+import {Table, Header, Image} from 'semantic-ui-react'
 import './members.css';
-
-import faker from 'faker';
 
 export default class Members extends Component {
 
 	fetchMembers = ()=> {
-
 		const _this = this;
 		_this.serverRequest = axios.get('/api/users').then((response)=> {
 			_this.setState({members: response.data});
@@ -25,17 +22,13 @@ export default class Members extends Component {
 		this.fetchMembers();
 	};
 
-	componentWillUnmount = ()=> {
-		this.serverRequest.abort();
-	};
-
 	createTableRow = (member) => {
 		return (
 
 			<Table.Row key={member._id}>
 				<Table.Cell>
 					<Header as='h4' image>
-						<Image src={faker.internet.avatar()} shape='rounded' size='mini'/>
+						<Image src={member.photoUrl} shape='rounded' size='mini'/>
 						<Header.Content>{member.firstName + " " + member.lastName}</Header.Content>
 					</Header>
 				</Table.Cell>
@@ -70,12 +63,6 @@ export default class Members extends Component {
 					</div>
 					: null
 				}
-
-				<div className="ui container align-center Main-content-layout">
-					<a href="http://localhost:3333/api/auth/facebook">
-						<Button className="primary" icon="add user"/>
-					</a>
-				</div>
 			</div>
 		)
 	}

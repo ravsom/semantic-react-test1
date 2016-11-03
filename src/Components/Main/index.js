@@ -4,9 +4,15 @@
 
 import React, {Component} from 'react';
 import Menu from '../MenuLayout'
+import {connect} from 'react-redux'
+import {getAuthenticatedUser} from '../../ActionCreators/userAuthActionCreator'
 
 import './Main.css'
-export default class MainLayout extends Component {
+class MainLayout extends Component {
+
+	componentWillMount = ()=> {
+		this.props.dispatch(getAuthenticatedUser());
+	};
 
 	render() {
 		return (
@@ -19,3 +25,13 @@ export default class MainLayout extends Component {
 		);
 	}
 }
+
+const mapStateToProps = (state)=> {
+	return {
+		authenticatedUser: state.authenticatedUser
+	}
+};
+
+const ConnectedMainLayout = connect(mapStateToProps)(MainLayout);
+export default ConnectedMainLayout;
+

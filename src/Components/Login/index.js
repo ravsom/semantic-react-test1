@@ -4,23 +4,32 @@
 
 import React, {Component} from 'react'
 
-import {Header} from 'semantic-ui-react'
+import {Header, Segment} from 'semantic-ui-react'
+import AccountCardGroup from '../AccountCardGroup/index'
+import {connect} from 'react-redux'
+
 class LoginComponent extends Component {
+
+	revealErrorContent = (error)=> {
+		return error ? (<Segment inverted color='red'>{error.message}</Segment>) : null;
+	};
 	render = ()=> {
+		const {error} = this.props;
 		return (
 			<div>
 				<Header as="h1">Login</Header>
-
-				// Facebook
-
-				// Google
-
-				// Fitbit
-
-				// Strava
+				{this.revealErrorContent(error)}
+				<AccountCardGroup/>
 			</div>
 		);
 	}
 }
 
-export default LoginComponent
+const mapStateToProps = (state)=> {
+	return {
+		error: state.default.get('error')
+	}
+};
+
+const ConnectedLoginComponent = connect(mapStateToProps)(LoginComponent);
+export default ConnectedLoginComponent

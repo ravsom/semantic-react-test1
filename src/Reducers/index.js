@@ -4,5 +4,9 @@
 
 import * as reducers from './userReducer'
 import {combineReducers} from 'redux'
+import {routerReducer} from 'react-router-redux'
 
-export const combinedReducers = combineReducers(reducers);
+
+export const combinedReducers = combineReducers(
+	{...reducers, routing: routerReducer}
+);

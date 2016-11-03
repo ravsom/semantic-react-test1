@@ -20,7 +20,6 @@ const routes = ()=> {
 			<Route path="record-session" component={RecordSession}/>
 			<Route path="feedback" component={SessionFeedback}/>
 			<Route path="login" component={LoginComponent}/>
-
 		</Route>
 	)
 };
