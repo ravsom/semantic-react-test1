@@ -43,3 +43,8 @@ Product targeted towards Spinning instructors to mark member attendance, trackli
     - Instructor's perceived exertion
     - Instructor Calories burnt
     - Tracklist played
+    
+## How to add a remote branch
+`git checkout branch-name`
+`git remote add branch-name git://github.com/jdoe/coolapp.git`
+`git push --set-upstream origin branch-name`
