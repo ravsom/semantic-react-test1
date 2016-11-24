@@ -6,12 +6,12 @@ import React, {Component} from 'react';
 import {Dropdown, Menu, Icon, Header, Image} from 'semantic-ui-react';
 import './menu-layout.css'
 import {connect} from 'react-redux'
-import {logoutUser} from '../../ActionCreators/userAuthActionCreator'
+import {logoutUser} from '../../ActionCreators/auth'
 
 class MenuLayout extends Component {
 
 	getDisplayName = (user)=> {
-		return user.firstName + ' ' + user.lastName;
+		return user.firstName;
 	};
 	triggerAccount = ()=> (
 		<span>
@@ -22,6 +22,10 @@ class MenuLayout extends Component {
 
 	triggerSessions = (
 		<span>Sessions</span>
+	);
+
+	triggerMembers = (
+		<span>Members</span>
 	);
 
 	redirectRequest = (name, e)=> {
@@ -36,11 +40,18 @@ class MenuLayout extends Component {
 		return (
 			<Menu.Menu position="right" className="ui container">
 				<Menu.Item>
-					<Dropdown trigger={this.triggerSessions} pointing="top right" icon={null}>
+					<Dropdown trigger={this.triggerMembers} pointing="top right" icon>
+						<Dropdown.Menu>
+							<Dropdown.Item text='Map' icon='users' onClick={this.redirectRequest.bind(this, 'approve-members')}/>
+							<Dropdown.Item text='Approved' icon='users' onClick={this.redirectRequest.bind(this, 'approved-members')}/>
+						</Dropdown.Menu>
+					</Dropdown>
+				</Menu.Item>
+				<Menu.Item>
+					<Dropdown trigger={this.triggerSessions} pointing="top right" icon>
 						<Dropdown.Menu>
 							<Dropdown.Item text='Record' icon='calendar'
 														 onClick={this.redirectRequest.bind(this, 'record-session')}/>
-							<Dropdown.Item text='Members' icon='users' onClick={this.redirectRequest.bind(this, 'members')}/>
 						</Dropdown.Menu>
 					</Dropdown>
 				</Menu.Item>
@@ -92,7 +103,6 @@ class MenuLayout extends Component {
 
 const mapStateToProps = (state)=> {
 	var authenticatedUser = state.default.get('authenticatedUser');
-	console.log('authenticated user: ' + (authenticatedUser));
 	return {
 		user: authenticatedUser
 	}

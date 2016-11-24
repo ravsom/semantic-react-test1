@@ -3,19 +3,31 @@
  */
 
 import React, {Component} from 'react'
-import {Header, Icon, Form, Label, Button, Message, Grid} from 'semantic-ui-react'
-
+import {Header, Icon, Form, Label, Button, Message, Grid, Modal, Input} from 'semantic-ui-react'
+import {connect} from 'react-redux'
 import AttendanceSelector from '../Attendance-Selector'
+import {bindActionCreators} from 'redux'
+import {addUser} from '../../ActionCreators/users'
+
 import './record-session.css'
 
-export default class RecordSession extends Component {
-	state = {serializedForm: {}};
+class RecordSession extends Component {
+	state = {serializedForm: {}, userName: ''};
 
 	handleSubmit = (e, serializedForm) => {
-		e.preventDefault()
+		e.preventDefault();
 		this.setState({serializedForm})
 	};
 
+
+	addUser = (e)=> {
+		e.preventDefault();
+		this.props.addUser(this.state.userName, this.state.userNumber);
+	};
+
+	handleChange = (e)=> {
+		this.setState({[e.target.name]: e.target.value});
+	};
 
 	render() {
 		const {serializedForm} = this.state;
@@ -38,7 +50,24 @@ export default class RecordSession extends Component {
 				<Form onSubmit={this.handleSubmit} id="sessionForm">
 
 					<AttendanceSelector/>
-					<Button className='ui align-center' primary type='submit'>Submit</Button>
+
+					<Button.Group>
+						<Button className='ui align-center' primary type='submit'>Submit</Button>
+						<Modal trigger={<Button secondary>Add</Button>}>
+							<Modal.Header>Add a Member</Modal.Header>
+							<Modal.Content >
+								<Modal.Description>
+									<Form>
+										<Input placeholder="User name" name="userName"
+													 onChange={this.handleChange}/>
+										<Input placeholder="Phone Number" name="userNumber"
+													 onChange={this.handleChange}/>
+										<Button primary onClick={this.addUser}>Add</Button>
+									</Form>
+								</Modal.Description>
+							</Modal.Content>
+						</Modal>
+					</Button.Group>
 					<Message>
 						<pre>serializedForm: {JSON.stringify(serializedForm, null, 2)}</pre>
 					</Message>
@@ -47,3 +76,18 @@ export default class RecordSession extends Component {
 		)
 	}
 }
+
+const mapStateToProps = (state)=> {
+	return {
+		userAdded: state.userAdded,
+		userNotAdded: state.userNotAdded
+	};
+};
+
+const mapDispatchToProps = (dispatch)=> {
+	return bindActionCreators({addUser}, dispatch)
+};
+
+
+const ConnecteddRecordSession = connect(mapStateToProps, mapDispatchToProps)(RecordSession);
+export default ConnecteddRecordSession;

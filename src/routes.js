@@ -10,6 +10,8 @@ import IndexLayout from './Components/DefaultLayout'
 import SessionFeedback from './Components/SessionFeedback'
 import UserProfile from './Components/UserProfile'
 import LoginComponent from './Components/Login'
+import ApproveMembers from './Components/ApproveMembers'
+import ApprovedMembers from './Components/approved-users'
 
 const routes = ()=> {
 	return (
@@ -20,6 +22,8 @@ const routes = ()=> {
 			<Route path="record-session" component={RecordSession}/>
 			<Route path="feedback" component={SessionFeedback}/>
 			<Route path="login" component={LoginComponent}/>
+			<Route path="approve-members" component={ApproveMembers}/>
+			<Route path="approved-members" component={ApprovedMembers}/>
 		</Route>
 	)
 };

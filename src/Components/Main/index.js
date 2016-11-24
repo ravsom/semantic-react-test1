@@ -5,12 +5,12 @@
 import React, {Component} from 'react';
 import Menu from '../MenuLayout'
 import {connect} from 'react-redux'
-import {getAuthenticatedUser} from '../../ActionCreators/userAuthActionCreator'
+import {getAuthenticatedUser} from '../../ActionCreators/auth'
 
 import './Main.css'
 class MainLayout extends Component {
 
-	componentWillMount = ()=> {
+	componentWillMount() {
 		this.props.dispatch(getAuthenticatedUser());
 	};
 
@@ -34,4 +34,3 @@ const mapStateToProps = (state)=> {
 
 const ConnectedMainLayout = connect(mapStateToProps)(MainLayout);
 export default ConnectedMainLayout;
-
