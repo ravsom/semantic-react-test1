@@ -5,7 +5,7 @@
 import React, {Component} from 'react'
 import {Card} from 'semantic-ui-react'
 
-import NetworkConnectCard from './NetworkConnectCard'
+import NetworkConnectCard from './network-connect-card'
 
 export default class AccountCardGroup extends Component {
 

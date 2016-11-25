@@ -3,7 +3,7 @@
  */
 import React, {Component} from 'react';
 import {Header, Icon, Segment, Rating, Form, Grid} from 'semantic-ui-react'
-import PlaylistFeedback from '../PlayListFeedback'
+import PlaylistFeedback from './playlist-feedback'
 
 export default class SessionFeedback extends Component {
 	render() {

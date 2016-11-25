@@ -5,7 +5,7 @@
 import React, {Component} from 'react'
 
 import {Header, Segment} from 'semantic-ui-react'
-import AccountCardGroup from '../AccountCardGroup/index'
+import AccountCardGroup from './account-card-group'
 import {connect} from 'react-redux'
 
 class LoginComponent extends Component {

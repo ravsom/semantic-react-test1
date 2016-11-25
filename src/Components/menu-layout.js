@@ -4,9 +4,9 @@
 
 import React, {Component} from 'react';
 import {Dropdown, Menu, Icon, Header, Image} from 'semantic-ui-react';
-import './menu-layout.css'
+import './styles/components.css'
 import {connect} from 'react-redux'
-import {logoutUser} from '../../ActionCreators/auth'
+import {logoutUser} from '../ActionCreators/auth'
 
 class MenuLayout extends Component {
 

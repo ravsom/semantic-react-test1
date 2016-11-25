@@ -5,7 +5,7 @@ import React, {Component} from 'react';
 import axios from 'axios'
 
 import {Table, Header, Image} from 'semantic-ui-react'
-import './members.css';
+import './styles/components.css';
 
 export default class Members extends Component {
 

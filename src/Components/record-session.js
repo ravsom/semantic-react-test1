@@ -5,11 +5,11 @@
 import React, {Component} from 'react'
 import {Header, Icon, Form, Label, Button, Message, Grid, Modal, Input} from 'semantic-ui-react'
 import {connect} from 'react-redux'
-import AttendanceSelector from '../Attendance-Selector'
+import AttendanceSelector from './attendance-selector'
 import {bindActionCreators} from 'redux'
-import {addUser} from '../../ActionCreators/users'
+import {addUser} from '../ActionCreators/users'
 
-import './record-session.css'
+import './styles/components.css'
 
 class RecordSession extends Component {
 	state = {serializedForm: {}, userName: ''};

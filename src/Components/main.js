@@ -3,11 +3,11 @@
  */
 
 import React, {Component} from 'react';
-import Menu from '../MenuLayout'
+import Menu from './menu-layout'
 import {connect} from 'react-redux'
-import {getAuthenticatedUser} from '../../ActionCreators/auth'
+import {getAuthenticatedUser} from '../ActionCreators/auth'
 
-import './Main.css'
+import './styles/components.css'
 class MainLayout extends Component {
 
 	componentWillMount() {

@@ -4,8 +4,8 @@
 
 import React, {Component} from 'react';
 import {Card, Icon} from 'semantic-ui-react'
-import './User.css'
-import AccountCardGroup from '../AccountCardGroup/index'
+import './styles/components.css'
+import AccountCardGroup from './account-card-group'
 
 export default class UserComponent extends Component {
 

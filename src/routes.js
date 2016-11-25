@@ -3,14 +3,14 @@
  */
 import {Route, IndexRoute} from "react-router"
 import React from 'react';
-import MainLayout from './Components/Main'
-import Members from './Components/Members';
-import RecordSession from './Components/Record-Session'
-import IndexLayout from './Components/DefaultLayout'
-import SessionFeedback from './Components/SessionFeedback'
-import UserProfile from './Components/UserProfile'
-import LoginComponent from './Components/Login'
-import ApproveMembers from './Components/ApproveMembers'
+import MainLayout from './Components/main'
+import Members from './Components/members';
+import RecordSession from './Components/record-session'
+import IndexLayout from './Components/default-layout'
+import SessionFeedback from './Components/session-feedback'
+import UserProfile from './Components/user-profile'
+import LoginComponent from './Components/login'
+import ApproveMembers from './Components/approve-members'
 import ApprovedMembers from './Components/approved-users'
 
 const routes = ()=> {

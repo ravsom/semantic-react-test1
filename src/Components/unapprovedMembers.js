@@ -8,7 +8,7 @@ import {List} from 'immutable'
 import {bindActionCreators} from 'redux';
 
 import {connect} from 'react-redux'
-import {fetchMappableMembers, approveUser, getMappableUsersLike} from '../../ActionCreators/users'
+import {fetchMappableMembers, approveUser, getMappableUsersLike} from '../ActionCreators/users'
 
 class UnApprovedMembers extends Component {
 
